@@ -54,16 +54,16 @@ Route::post('/sign-up', function(Request $request) {
 
 	$data = $request->all();
 	try{
-		$user = \App\Http\Models\User::where('email', '=', $data['email'] )->firstOrFail();		
+		$user = \App\User::where('email', '=', $data['email'] )->firstOrFail();		
 	} catch ( Exception $e ) {
 		
-		$user = new \App\Http\Models\User();
+		$user = new \App\User();
 		$user->email = $data['email'];
 		$user->password = bcrypt( $data['password'] );
 		$user->first_name = $data['first_name'];
 		$user->last_name = $data['last_name'];
 		$user->birthday_date = date("Y-m-d", strtotime($data['birthday_date']));
-		$user->wishlist = $data['wishlist'];		
+		$user->wishlist = $data['wishlist'];
 		$user->save();
 
 		// Flush calendar cache on user sign up action.
@@ -80,11 +80,15 @@ Route::get('/logout', function(Request $request) {
 	return redirect('/');
 });
 
-Route::get('/?password_reset_key={user_activation_key}', function($user_activation_key) {
+
+
+
+Route::get('/', function() {
+
 	$user_activation_key = filter_input( INPUT_GET, 'password_reset_key', FILTER_SANITIZE_STRING );
 	if( $user_activation_key ) {
 		try{
-			$user = \App\Http\Models\User::where('user_activation_key', '=', $user_activation_key )->firstOrFail();
+			$user = \App\User::where('user_activation_key', '=', $user_activation_key )->firstOrFail();
 			$newPassword = rand( 1,99999 );
 			$user->password = bcrypt( $newPassword );
 			$user->save();
@@ -99,13 +103,8 @@ Route::get('/?password_reset_key={user_activation_key}', function($user_activati
 	
 		} catch ( Exception $e ){
 			//echo $e->getMessage();		
-		}			
+		}
 	}
-});
-
-
-Route::get('/', function() {
-
 
 	$isUserLoggedIn = Auth::check();
 
@@ -119,7 +118,6 @@ Route::get('/', function() {
 	]); 
 });
 
-
 Route::post('/',function(){
 	
 	if ( 1 == filter_input( INPUT_POST, 'reset_password', FILTER_SANITIZE_NUMBER_INT ) ) {
@@ -127,7 +125,7 @@ Route::post('/',function(){
 		
 
 		try{
-			$user = \App\Http\Models\User::where('email', '=', $email)->firstOrFail();
+			$user = \App\User::where('email', '=', $email)->firstOrFail();
 
 			$salt = $email;		
 			$user->user_activation_key = substr( hash_hmac( 'sha256', rand( 0, 100 ), $salt ), 0, 8 );
@@ -138,7 +136,7 @@ Route::post('/',function(){
 			return view( 'message', [
 				'title' => 'Password Reset',
 				'message' => 'Please check your email box!',
-			]);			
+			]);	
 
 		} catch ( Exception $e ) {
 			echo $e->getMessage();

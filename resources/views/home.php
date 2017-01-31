@@ -104,6 +104,7 @@
 						
 						<br>
                         <div>
+						  <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
                           <button class="btn btn-primary">Create Account</button>
                         </div>
                       </form>
@@ -119,6 +120,7 @@
 							<input type="hidden" name="reset_password" value="1">
 							<br>
 							<div>
+							  <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
 							  <button class="btn btn-primary">Password Reset</button>
 							</div>							
 						</form>

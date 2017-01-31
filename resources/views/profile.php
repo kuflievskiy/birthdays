@@ -102,7 +102,8 @@
 					
 					<br>
 					<div>
-					  <button class="btn btn-primary">Update</button>
+						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+						<button class="btn btn-primary">Update</button>
 					</div>
 				  </form>
 					 
@@ -117,6 +118,7 @@
 					
 					<br>
 					<div>
+						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 					  <button class="btn btn-primary">Update</button>
 					</div>					
 				</form>
