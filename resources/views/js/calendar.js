@@ -2,10 +2,11 @@
 		
 	var Calendar = function (opt) {
 		$.extend(this, opt);
-//		setTimeout(function(){})
 		this.init();
 	};
 	Calendar.prototype.init = function () {
+		
+		/*
 		$('[data-toggle="popover"]').popover({
 			container: 'body',
 			html: true,
@@ -14,6 +15,7 @@
 			$('[data-toggle="popover"]').not(this).popover('hide');
 			e.preventDefault();
 		});
+		*/
 	};
 	$(document).ready(function () {
 		new Calendar();

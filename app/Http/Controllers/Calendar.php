@@ -153,20 +153,40 @@ class Calendar extends BaseController
 
     function return_birthdays($md,$users_birthdays){
         $return = '';
-        foreach($users_birthdays as $user_data){
+        foreach($users_birthdays as $index => $user_data){
             if(isset($user_data['birthday_date'])){
                 if( $md == substr($user_data['birthday_date'],5,5) ){
 
                     $gravatar = $this->get_gravatar($user_data['email']);
 					$wishList = ! empty( trim( $user_data['wishlist'] ) ) ? $user_data['wishlist'] : 'Wish List is Empty';
-                    $text = '<br>
+                    $text = '
                     <p>
                     ' . $user_data['first_name'] . '
-                    <a href="#" data-toggle="popover" title="' . $user_data['first_name'] . ' ' . $user_data['last_name'] . '" data-content="' . '<p>' . $user_data['email'] . '</p>' . $wishList . '">';					
+                    <a href="#" data-toggle="modal" data-target="#modal-'.$index.'" title="' . $user_data['first_name'] . ' ' . $user_data['last_name'] . '" >';					
                     if($gravatar) {
                         $text .= "<img src=" . $this->get_gravatar($user_data['email']) . " />";
 					}
-                    $text .= "</a></p>";
+                    $text .= "</a>";
+					$text .= '
+						<!-- Modal -->
+						<div class="modal fade" id="modal-'.$index.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+							<div class="modal-content">
+							  <div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLongTitle">'.$user_data['email'].'\'s Wish List</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								  <span aria-hidden="true">&times;</span>
+								</button>
+							  </div>
+							  <div class="modal-body">'.$wishList.'</div>
+							  <div class="modal-footer">					  
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+								<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+							  </div>
+							</div>
+						  </div>
+						</div>';
+					$text .= "</p>";
                     $return .= $text;
                 }
             }
