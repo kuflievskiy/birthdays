@@ -10,6 +10,12 @@
 	<link href="../../vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		.centered{text-align:center;}
+		.weekend-day{
+			color:red;
+		}
+			.weekend-day>*{
+				color:black;
+			}
 	</style>
 	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->

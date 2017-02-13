@@ -131,11 +131,8 @@ class Calendar extends BaseController
 					echo "<tr>";
 					for($j = 0; $j < 7; $j++){
 						if(!empty($week[$i][$j])){
-							// Если имеем дело с субботой и воскресенья
-							// подсвечиваем их
-							if($j == 5 || $j == 6)
-								echo "<td><font color=red>".$week[$i][$j]."</font></td>";
-							else echo "<td>".$week[$i][$j]."</td>";
+							$class = ($j == 5 || $j == 6) ? " class='weekend-day'": "";
+							echo "<td ".$class.">".$week[$i][$j]."</td>";
 						}
 						else echo "<td>&nbsp;</td>";
 					}
