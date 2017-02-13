@@ -9,6 +9,9 @@
 	<!-- Bootstrap core CSS -->
 	<link href="../../vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 	<style>
+		html {
+		  overflow-y: scroll;
+		}
 		.centered{text-align:center;}
 		.weekend-day{
 			color:red;
