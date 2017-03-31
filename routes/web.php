@@ -139,7 +139,11 @@ Route::post('/',function(){
 			]);	
 
 		} catch ( Exception $e ) {
-			echo $e->getMessage();
+			
+			return view( 'message', [
+				'title' => 'Error',
+				'message' => 'Sorry, but there is no user with this email address. Are you a hacker?', //$e->getMessage(),
+			]);
 		}
 
 	}
