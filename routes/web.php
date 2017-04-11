@@ -102,16 +102,17 @@ Route::get('/', function() {
 			return redirect('/profile/' . $user->id );
 	
 		} catch ( Exception $e ){
-			//echo $e->getMessage();		
+			return view( 'message', [
+				'title' => 'Error occured',
+				'message' => 'Wrong password_reset_key parameter!',
+			]);
 		}
 	}
 
-	$isUserLoggedIn = Auth::check();
-
-	if ( $isUserLoggedIn ) {
-		header("Location: /calendar/" . date('Y') );
-		die();
+	if ($isUserLoggedIn = Auth::check()) {
+		return redirect('/calendar/' . date('Y') );
 	}
+
     return view('home', [
 		'title' => 'CMS Team Birthdays',
 		'isUserLoggedIn' => $isUserLoggedIn,
