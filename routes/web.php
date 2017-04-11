@@ -152,8 +152,7 @@ Route::post('/',function(){
 
 
 Route::get('/calendar', function(){
-	header("Location: /calendar/" . date('Y') );
-	die();
+	return redirect('/calendar/' . date('Y') );
 });
 
 Route::get('/calendar/{year}', 'Calendar@index');
