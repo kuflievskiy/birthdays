@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/v1/calendar', 'API\v1\Calendar@index');
+Route::get('/v1/calendar/{year}', 'API\v1\Calendar@index');
+Route::get('/v1/calendar/{year}/{month}/{day?}', 'API\v1\Calendar@date');
