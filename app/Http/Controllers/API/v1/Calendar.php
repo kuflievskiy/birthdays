@@ -10,11 +10,33 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 
+use Request;
+use Config;
+use App\Helpers\APIConnection;
+
 class Calendar extends BaseController
 {
 
+	/**
+	 * @property APIConnection $apiConnection
+	 */
+	protected $apiConnection;
+	
+	/**
+	 * __construct
+	 * @param APIConnection $apiConnection
+	 * */
+	public function __construct(APIConnection $apiConnection) {
+		$this->apiConnection = $apiConnection;
+	}
+	
 	public function index(){
 
+		$access = $this->apiConnection->isAPIAccessAllowed();
+		if ( false == $access['success'] ) {
+			return response('', $access['code'] )->send();
+		}
+		
 		$collection = User::where('blocked', 0)->get();
 
 		if(count($collection)){
@@ -27,15 +49,28 @@ class Calendar extends BaseController
 	}
 	
 	/**
+	 * Function date
 	 *
-	 * */
+	 * @param $year
+	 * @param $month
+	 * @param $day
+	 *
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function date($year,$month,$day=''){
+		
+		$access = $this->apiConnection->isAPIAccessAllowed();
+		if ( false == $access['success'] ) {
+			return response('', $access['code'] )->send();
+		}
 
 		$query = User::where('blocked', 0)->whereMonth('birthday_date','=',$month);
 		
 		if($day){
 			$query->whereDay('birthday_date','=',$day);
 		}
+
 		$collection = $query->get();
 
 		if(count($collection)){
@@ -46,5 +81,18 @@ class Calendar extends BaseController
 		
 		return response()->json([$users, 200]);
 	}
-	
+
+	/**
+	 * Function test
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 *
+	 * curl -i -X GET -H 'X-SecretKey: xxxx' /api/v1/test
+	 * curl -i -X GET -H 'X-SecretKey: xxxx' /api/v1/calendar/2017/04/05
+	 * curl -i -X GET -H 'X-SecretKey: xxxx' /api/v1/calendar/2017/04
+	 * curl -i -X GET -H 'X-SecretKey: xxxx' /api/v1/calendar/2017
+	 */
+	public function test() {
+		return response()->json([$this->apiConnection->isAPIAccessAllowed(), 200]);
+	}
 }

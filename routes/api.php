@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/v1/calendar', 'API\v1\Calendar@index');
 Route::get('/v1/calendar/{year}', 'API\v1\Calendar@index');
 Route::get('/v1/calendar/{year}/{month}/{day?}', 'API\v1\Calendar@date');
+
+Route::get('/v1/test', 'API\v1\Calendar@test');
