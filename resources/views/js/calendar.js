@@ -5,17 +5,7 @@
 		this.init();
 	};
 	Calendar.prototype.init = function () {
-		
-		/*
-		$('[data-toggle="popover"]').popover({
-			container: 'body',
-			html: true,
-			placement: 'auto right'
-		}).on("click",function(e){
-			$('[data-toggle="popover"]').not(this).popover('hide');
-			e.preventDefault();
-		});
-		*/
+
 	};
 	$(document).ready(function () {
 		new Calendar();

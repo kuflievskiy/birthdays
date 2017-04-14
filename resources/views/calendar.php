@@ -21,7 +21,6 @@
 			}
 	</style>
 	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	<script src="/resources/views/js/calendar.js"></script>
 </head>
@@ -56,15 +55,72 @@
 
 		
 	<div class="row">
-
-		<?php foreach($calendar as $month_index => $month): ?>
+        <?php $modalBoxes = ''; ?>
+		<?php foreach($calendar as $month_index => $monthData): ?>
 			<div class="col-md-4">
-				<h4><?php echo $russian_months[$month_index] . ' [ <span style="color:lightseagreen;">'.  date("F", mktime(0, 0, 0, $month_index, 10)) . '</span> ]'; ?></h4>
-				<?php echo $month; ?>
+				<h4>
+                    <?php echo $russian_months[$month_index] . ' [ <span style="color:lightseagreen;">'.  date("F", mktime(0, 0, 0, $month_index, 10)) . '</span> ]'; ?>
+                </h4>
+                <table class='table table-striped table-bordered'>
+                    <tr>
+                        <td>MON</td>
+                        <td>TUE</td>
+                        <td>WED</td>
+                        <td>THU</td>
+                        <td>FRI</td>
+                        <td>SAT</td>
+                        <td>SUN</td>
+                    </tr>
+                        <?php for($i = 0; $i < count($monthData); $i++) : ?>
+                            <tr>
+                                <?php for($j = 0; $j < 7; $j++) : ?>
+                                    <?php if(!empty($monthData[$i][$j])) : ?>
+                                        <?php $class = ($j == 5 || $j == 6) ? " class='weekend-day'": ""; ?>
+                                        <td <?php echo $class; ?>>
+                                        <?php echo $monthData[$i][$j]['dayNum']; ?>
+                                            <?php if (!empty($monthData[$i][$j]['users'])): ?>
+                                                <?php foreach($monthData[$i][$j]['users'] as $userData): ?>
+                                                    <a href="#" data-toggle="modal" data-target="#modal-<?php echo $i.$j; ?>" title="<?php echo $userData['first_name'] . ' ' . $userData['last_name']; ?>" >
+                                                        <img src="<?php echo $userData['gravatarURL']; ?>" />
+                                                    </a>
+                                                    <?php
+                                                    $modalBoxes .= '
+                                                        <div class="modal fade" id="modal-'.$i.$j.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                          <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                              <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">'.$userData['email'].'\'s Wish List</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                  <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                              </div>
+                                                              <div class="modal-body">'.nl2br($userData['wishlist']).'</div>
+                                                              <div class="modal-footer">					  
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>';
+                                                    ?>
+                                                <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </td>
+                                    <?php else : ?>
+                                        <td>&nbsp;</td>
+                                    <?php endif; ?>
+                                <?php endfor; ?>
+                            </tr>
+                        <?php endfor; ?>
+
+                    </table>
+
+
 			</div>
 			
 			<?php echo ($month_index % 3 == 0 ) ? '<div class="col-md-12"></div>' : ''; ?>
 		<?php endforeach; ?>
+
+        <?php echo $modalBoxes; ?>
 	</div>
 </body>
 </html>
