@@ -79,13 +79,13 @@
                                         <td <?php echo $class; ?>>
                                         <?php echo $monthData[$i][$j]['dayNum']; ?>
                                             <?php if (!empty($monthData[$i][$j]['users'])): ?>
-                                                <?php foreach($monthData[$i][$j]['users'] as $userData): ?>
-                                                    <a href="#" data-toggle="modal" data-target="#modal-<?php echo $i.$j; ?>" title="<?php echo $userData['first_name'] . ' ' . $userData['last_name']; ?>" >
+                                                <?php foreach($monthData[$i][$j]['users'] as $userIndex => $userData): ?>
+                                                    <a href="#" data-toggle="modal" data-target="#modal-<?php echo $month_index.$i.$j.$userIndex; ?>" title="<?php echo $userData['first_name'] . ' ' . $userData['last_name']; ?>" >
                                                         <img src="<?php echo $userData['gravatarURL']; ?>" />
                                                     </a>
                                                     <?php
                                                     $modalBoxes .= '
-                                                        <div class="modal fade" id="modal-'.$i.$j.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                        <div class="modal fade" id="modal-'.$month_index.$i.$j.$userIndex.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                                           <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                               <div class="modal-header">
@@ -94,7 +94,9 @@
                                                                   <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                               </div>
-                                                              <div class="modal-body">'.nl2br($userData['wishlist']).'</div>
+                                                              <div class="modal-body">
+                                                              <p>'.$userData['first_name'].' '.$userData['last_name'].'</p>
+                                                              '.nl2br($userData['wishlist']).'</div>
                                                               <div class="modal-footer">					  
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
                                                               </div>

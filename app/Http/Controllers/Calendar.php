@@ -47,7 +47,7 @@ class Calendar extends BaseController
 			return ((float)$usec + (float)$sec);
 		}
 
-		$time_start = microtime_float();
+		//$time_start = microtime_float();
 
 		$calendar = [];
 		for($i = 1; $i <= 12; $i++){
@@ -55,17 +55,17 @@ class Calendar extends BaseController
 		}
 
 		// Fill in calendar with data from database.
-		foreach( $users as $userData ) {
-			$dateMonth = substr( $userData['birthday_date'], 5, 2 );
-			$dateDay = substr( $userData['birthday_date'], 8, 2 );
+		foreach ($users as $userData) {
+			$dateMonth = substr($userData['birthday_date'], 5, 2);
+			$dateDay   = substr($userData['birthday_date'], 8, 2);
 
 			// Remove leading zero in strings.
-			$dateMonth = (int)ltrim( $dateMonth, '0' );
-			$dateDay = (int)ltrim( $dateDay, '0' );
+			$dateMonth = (int)ltrim($dateMonth, '0');
+			$dateDay   = (int)ltrim($dateDay, '0');
 
-			foreach( $calendar[$dateMonth] as &$weekDays ) {
-				foreach( $weekDays as $dayIndex => &$dayData ) {
-					if( isset( $dayData['dayNum'] ) && $dateDay == $dayData['dayNum'] ) {
+			foreach ($calendar[$dateMonth] as &$weekDays) {
+				foreach ($weekDays as $dayIndex => &$dayData) {
+					if (isset($dayData['dayNum']) && $dateDay == $dayData['dayNum']) {
 						$dayData['users'][] = [
 							'gravatarURL' => $this->getGravatarURL($userData['email']),
 							'wishlist'    => $userData['wishlist'],
@@ -79,16 +79,14 @@ class Calendar extends BaseController
 			}
 		}
 
-
-		$time_end = microtime_float();
-		$time = $time_end - $time_start;
+		//$time_end = microtime_float();
+		//$time     = $time_end - $time_start;
 
 		return view('calendar', [
 			'calendar' => $calendar, 
 			'year' => $year,
 			'russian_months' => $this->russian_months,
 			'userData' => \Auth::user(),
-			'generatedIn' => round( $time, 2 ),
 		]);
 	}
 
@@ -104,7 +102,7 @@ class Calendar extends BaseController
 	{
 		$monthData = [];
 
-		if ( \Cache::has('calendar'.$month.$year)) {
+		if ( 0 && \Cache::has('calendar'.$month.$year)) {
 			$monthData = \Cache::get('calendar'.$month.$year);
 		}else{
 			$dayofmonth = date("t", mktime(1, 1, 1, $month, 1, $year)) ;// Вычисляем число дней в текущем месяце
