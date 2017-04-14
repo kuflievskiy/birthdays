@@ -24,7 +24,7 @@
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	<script src="/resources/views/js/calendar.js"></script>
 </head>
-<body> 
+<body class="month-<?php echo strtolower( date( 'F' ) ); ?>">
 		
 <nav class="navbar navbar-default" role="navigation">
    <div class="navbar-header">
