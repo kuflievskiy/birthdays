@@ -37,8 +37,8 @@
 			<div class="tab-pane active" id="profile">
 				<h1>Profile</h1>
 				<center>
-				
-				<?php $gravatar_image_url = \App\Http\Controllers\Calendar::get_gravatar($userData->email, 200,200); ?>
+
+				<?php $gravatar_image_url = \App\Http\Controllers\Calendar::getGravatarURL($userData->email, 200,200); ?>
 				<?php if(!empty($gravatar_image_url)): ?>
 					<p><img src="<?php echo $gravatar_image_url; ?>" name="aboutme" width="200" height="200" border="0" class="img-circle"></p>
 				<?php endif; ?>
