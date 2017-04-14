@@ -80,9 +80,14 @@
                                         <?php echo $monthData[$i][$j]['dayNum']; ?>
                                             <?php if (!empty($monthData[$i][$j]['users'])): ?>
                                                 <?php foreach($monthData[$i][$j]['users'] as $userIndex => $userData): ?>
-                                                    <a href="#" data-toggle="modal" data-target="#modal-<?php echo $month_index.$i.$j.$userIndex; ?>" title="<?php echo $userData['first_name'] . ' ' . $userData['last_name']; ?>" >
-                                                        <img src="<?php echo $userData['gravatarURL']; ?>" />
-                                                    </a>
+                                                    <div>
+                                                        <p><?php echo $userData['first_name'].' '.$userData['last_name']; ?></p>
+                                                        <p>
+                                                            <a href="#" data-toggle="modal" data-target="#modal-<?php echo $month_index.$i.$j.$userIndex; ?>" title="<?php echo $userData['first_name'] . ' ' . $userData['last_name']; ?>" >
+                                                            <img src="<?php echo $userData['gravatarURL']; ?>" />
+                                                            </a>
+                                                        </p>
+                                                    </div>
                                                     <?php
                                                     $modalBoxes .= '
                                                         <div class="modal fade" id="modal-'.$month_index.$i.$j.$userIndex.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
