@@ -33,6 +33,10 @@ class Calendar extends BaseController
 
 	public function index( $year ){
 
+		if( ! \Auth::check() ) {
+			return redirect('/?redirect_to=' . url('/calendar/' . $year));
+		}
+
 		$collection = User::where('blocked', 0)->orderBy(\DB::raw("DATE_FORMAT(birthday_date,'%m%d')"), 'asc')->get();
 
 		if(count($collection)){
@@ -40,14 +44,6 @@ class Calendar extends BaseController
 		}else{
 			$users = [];
 		}
-
-		function microtime_float()
-		{
-			list($usec, $sec) = explode(" ", microtime());
-			return ((float)$usec + (float)$sec);
-		}
-
-		//$time_start = microtime_float();
 
 		$calendar = [];
 		for($i = 1; $i <= 12; $i++){
@@ -79,10 +75,13 @@ class Calendar extends BaseController
 			}
 		}
 
-		//$time_end = microtime_float();
-		//$time     = $time_end - $time_start;
+		if('true' == filter_input(INPUT_GET,'showMeYourSecret')){
+			$template = 'calendar-new';
+		}else{
+			$template = 'calendar';
+		}
 
-		return view('calendar', [
+		return view($template, [
 			'calendar' => $calendar, 
 			'year' => $year,
 			'russian_months' => $this->russian_months,

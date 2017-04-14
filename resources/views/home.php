@@ -35,7 +35,7 @@
                   <ul class="nav nav-tabs">
                     <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
                     <li><a href="#create" data-toggle="tab">Create Account</a></li>
-                    <li><a href="#password-reset" data-toggle="tab">Reset Password</a></li>					
+                    <li><a href="#password-reset" data-toggle="tab">Reset Password</a></li>
                   </ul>
                   <div id="myTabContent" class="tab-content">
                     <div class="tab-pane active in" id="login">
@@ -70,12 +70,13 @@
                           <div class="control-group">
                             <!-- Button -->
                             <div class="controls">
+                              <input type="hidden" name="redirect_to" value="<?php echo filter_input( INPUT_GET, 'redirect_to', FILTER_SANITIZE_URL ); ?>">
 							  <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
                               <button class="btn btn-success">Login</button>
                             </div>
                           </div>
                         </fieldset>
-                      </form>                
+                      </form>
                     </div>
 
                     <div class="tab-pane fade" id="create">

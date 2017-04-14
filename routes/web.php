@@ -22,7 +22,9 @@ Route::get('/', function () {
 
 
 
-
+/**
+ * @todo move this action to special Controller for Auth
+ * */
 Route::post('/sign-in', function(Request $request) {
 
 	$data = $request->all();
@@ -38,7 +40,9 @@ Route::post('/sign-in', function(Request $request) {
 		// The user is active, not suspended, and exists.
 
 		$userData = Auth::user();
-		return redirect('/profile/' . $userData->id);
+
+		$redirectTo = $data['redirect_to'] ? $data['redirect_to'] : url('/profile/' . $userData->id);
+		return redirect($redirectTo);
 	} else {
 		
 		return view( 'message', [
@@ -49,7 +53,9 @@ Route::post('/sign-in', function(Request $request) {
 
 });
 
-
+/**
+ * @todo move this action to special Controller for Auth
+ * */
 Route::post('/sign-up', function(Request $request) {
 
 	$data = $request->all();
@@ -75,6 +81,9 @@ Route::post('/sign-up', function(Request $request) {
 	
 });
 
+/**
+ * @todo move this action to special Controller for Auth
+ * */
 Route::get('/logout', function(Request $request) {
 	\Auth::logout();
 	return redirect('/');
