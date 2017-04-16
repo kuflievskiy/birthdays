@@ -1,0 +1,106 @@
+# http://docs.travis-ci.com/user/build-configuration/
+language: php
+php:
+  - 5.6
+  - 7.0
+services:
+  - mysql
+  - openssl
+  - curl
+  - session
+sudo: false
+branches:
+  only:
+    - master
+    - development
+addons:
+  firefox: "41.0"
+  apt:
+    packages:
+    - apache2
+
+install:
+  - php -m
+  - pwd
+  - phantomjs --version
+
+  - wget https://phar.phpunit.de/phpcpd-2.0.1.phar --no-check-certificate
+  - chmod +x phpcpd-2.0.1.phar
+  - mv phpcpd-2.0.1.phar phpcpd
+  - export PATH=$PATH:$PWD
+
+  ## PHP_CodeSniffer
+  - git clone --depth=1 --branch=master https://github.com/squizlabs/PHP_CodeSniffer.git phpcs
+
+  # @todo : setup Laravel coding standard here
+  # WordPress Coding Standards
+  #- git clone --depth=1 --branch=master https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git wpcs
+  #- phpcs/scripts/phpcs --config-set installed_paths ../wpcs
+  #- phpcs/scripts/phpcs --config-set default_standard WordPress
+
+  - phpenv rehash
+
+  # PHPCS version
+  - phpcs/scripts/phpcs --version
+
+  # Installed PHPCS coding standards
+  - phpcs/scripts/phpcs -i
+
+  ## PHP Mess Detector
+  - pear config-set preferred_state beta
+  - printf "\n" | pecl install imagick
+  - pear channel-discover pear.phpmd.org
+  - pear channel-discover pear.pdepend.org
+  - pear install --alldeps phpmd/PHP_PMD
+  - phpenv rehash
+
+
+
+
+before_script:
+
+  - # reset admin password
+  - mysqladmin -u "root" password "rootpass"
+
+  - # create database
+  - mysqladmin create birthdays --user="root" --password="rootpass"
+
+  - cp .env.ci .env  #copy over CI environment configuration
+
+  - travis_retry composer self-update
+  - travis_retry composer install --prefer-source --no-interaction --dev
+  - chmod -R 777 storage/
+  - php artisan migrate
+  - php artisan db:seed
+
+  - wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - java -jar selenium-server-standalone-2.53.1.jar -port 4444 >/dev/null 2>&1 &
+  - sleep 5
+
+  - php -S 0.0.0.0:8000 &
+  - stty cols 160
+
+  # Disable xdebug when we don't need coverage to speed up testing
+  - phpenv config-rm xdebug.ini
+
+script:
+
+  ## PHP Mess Detector
+  # - phpmd ~/build/kuflievskiy/birthdays/ text ~/build/kuflievskiy/birthdays/phpmd.ruleset.xml --exclude storage/*,tests/*,vendor/*
+
+  ## PHP_CodeSniffer
+
+  #- phpcs/scripts/phpcs --extensions=php --ignore=*/storage/*,*/tests/*,*/vendor/* --standard=~/build/kuflievskiy/birthdays/phpcs.ruleset.xml --warning-severity=8 --error-severity=1 -p --report=source ~/kuflievskiy/birthdays
+
+  ## PHP Copy/Paste Detector
+  #- phpcpd --exclude=core --exclude=storage --exclude=vendor --verbose .
+
+  # Run Codeception tests
+  # @todo
+
+  wget http://localhost:8000
+notifications:
+  email:
+    kuflievskiy@gmail.com
