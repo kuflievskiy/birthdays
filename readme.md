@@ -1,4 +1,4 @@
 ## Travis CI
 
-Master branch : [![Build Status](https://magnum.travis-ci.com/kuflievskiy/birthdays.svg?token=&branch=master)](https://magnum.travis-ci.com/kuflievskiy/birthdays)
+Master branch : [![Build Status](https://travis-ci.org/kuflievskiy/birthdays.svg?branch=master)](https://travis-ci.org/kuflievskiy/birthdays)
    
