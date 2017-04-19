@@ -101,7 +101,7 @@ class Calendar extends BaseController
 	{
 		$monthData = [];
 
-		if ( 0 && \Cache::has('calendar'.$month.$year)) {
+		if (\Cache::has('calendar'.$month.$year)) {
 			$monthData = \Cache::get('calendar'.$month.$year);
 		}else{
 			$dayofmonth = date("t", mktime(1, 1, 1, $month, 1, $year)) ;// Вычисляем число дней в текущем месяце
@@ -126,10 +126,6 @@ class Calendar extends BaseController
 					// числами месяца
 					$monthData[$num][$i]['dayNum'] = date('j',mktime(0, 0, 0,$month,$day_count,$year));
 
-					// @todo
-					//$week[$num][$i]['users'] = $this->getUsersByDate(date('m-d',mktime(0, 0, 0,$month,$day_count,$year)),$users);
-
-
 					$day_count++;
 				} else{
 					$monthData[$num][$i] = "";
@@ -142,10 +138,6 @@ class Calendar extends BaseController
 				for($i = 0; $i < 7; $i++)
 				{
 					$monthData[$num][$i]['dayNum'] = $day_count;
-					// @todo
-
-					//$week[$num][$i]['users'] = $this->getUsersByDate(date('m-d',mktime(0, 0, 0,$month,$day_count,$year)),$users);
-
 					$day_count++;
 					// Если достигли конца месяца - выходим
 					// из цикла
