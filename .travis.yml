@@ -68,9 +68,9 @@ before_script:
   - cp .env.ci .env  #copy over CI environment configuration
 
   - travis_retry composer self-update
-  - php artisan key:generate
   - travis_retry composer install --prefer-source --no-interaction
   - chmod -R 777 storage/
+  #- php artisan key:generate
   - php artisan migrate
   - php artisan db:seed
 
