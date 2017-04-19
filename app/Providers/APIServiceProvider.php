@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 
 use App\Helpers\APIConnection;
-
+use Illuminate\Support\Facades\Schema;
 
 class APIServiceProvider extends ServiceProvider
 {
