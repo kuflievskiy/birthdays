@@ -54,10 +54,9 @@ install:
   - pear install --alldeps phpmd/PHP_PMD
   - phpenv rehash
 
-
-
-
 before_script:
+   # Disable xdebug when we don't need coverage to speed up testing
+   - phpenv config-rm xdebug.ini
 
   - # reset admin password
   - mysqladmin -u "root" password "rootpass"
@@ -101,7 +100,7 @@ script:
   # Run Codeception tests
   # @todo
 
-  wget http://localhost:8000
+  wget http://localhost:8080
 notifications:
   email:
     kuflievskiy@gmail.com
