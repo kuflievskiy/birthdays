@@ -99,7 +99,7 @@ script:
   ## PHP Copy/Paste Detector
   #- phpcpd --exclude=core --exclude=storage --exclude=vendor --verbose .
 
-  curl http://localhost:8080
+  - curl http://localhost:8080
 
   - cd ~/build/kuflievskiy/birthdays/codeception/
   # Run Codeception Acceptance tests
