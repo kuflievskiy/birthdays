@@ -30,6 +30,13 @@ install:
   - mv phpcpd-2.0.1.phar phpcpd
   - export PATH=$PATH:$PWD
 
+  ## Initializing Apache2 and PHP-FPM
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf; fi
+  - cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+  - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+  - chmod +x build/Resources/apache2/apache2.sh
+  - build/Resources/apache2/apache2.sh
+
   ## PHP_CodeSniffer
   - git clone --depth=1 --branch=master https://github.com/squizlabs/PHP_CodeSniffer.git phpcs
 
