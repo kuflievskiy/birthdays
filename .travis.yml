@@ -18,6 +18,7 @@ addons:
   apt:
     packages:
     - apache2
+    - libapache2-mod-fastcgi
 
 install:
   - php -m
@@ -100,11 +101,15 @@ script:
   #- phpcpd --exclude=core --exclude=storage --exclude=vendor --verbose .
 
   - curl http://localhost:8080
+  - curl http://localhost:80
+  - curl http://localhost
+  - curl http://localhost:8080/public/index.php
 
   - cd ~/build/kuflievskiy/birthdays/codeception/
+
   # Run Codeception Acceptance tests
-  - php ~/build/kuflievskiy/birthdays/vendor/bin/codecept bootstrap
-  - php ~/build/kuflievskiy/birthdays/vendor/bin/codecept build
+  - php /build/kuflievskiy/birthdays/vendor/bin/codecept bootstrap
+  - php /build/kuflievskiy/birthdays/vendor/bin/codecept build
   - mv -f tests/acceptance.suite.sample.yml tests/acceptance.suite.yml
   - mv -f tests/functional.suite.sample.yml tests/functional.suite.yml
   - mv -f tests/unit.suite.sample.yml tests/unit.suite.yml
@@ -113,9 +118,9 @@ script:
   - mv -f codeception.sample.yml codeception.yml
   - cat codeception.yml
   - cat tests/acceptance.suite.yml
-  - php ~/build/kuflievskiy/birthdays/vendor/bin/codecept run acceptance --steps --env phantom --env firefox
-  - php ~/build/kuflievskiy/birthdays/vendor/bin/codecept run functional --steps
-  - php ~/build/kuflievskiy/birthdays/vendor/bin/codecept run unit --steps
+  - php /build/kuflievskiy/birthdays/vendor/bin/codecept run acceptance --steps --env phantom --env firefox
+  - php /build/kuflievskiy/birthdays/vendor/bin/codecept run functional --steps
+  - php /build/kuflievskiy/birthdays/vendor/bin/codecept run unit --steps
 
 notifications:
   email:
