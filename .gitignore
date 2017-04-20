@@ -10,3 +10,5 @@ Homestead.yaml
 
 # is used in app/Helpers/APIConnection.php
 /config/api.php
+/codeception/windows/distribs/
+/codeception/windows/cmd/config.cmd

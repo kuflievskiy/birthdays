@@ -55,6 +55,11 @@ install:
   - phpenv rehash
 
 before_script:
+
+  # https://getcomposer.org/doc/articles/troubleshooting.md#xdebug-impact-on-composer
+  #- export COMPOSER_ALLOW_XDEBUG=0
+  #- export COMPOSER_DISABLE_XDEBUG_WARN=1
+
   - # reset admin password
   - mysqladmin -u "root" password "rootpass"
 
@@ -94,10 +99,24 @@ script:
   ## PHP Copy/Paste Detector
   #- phpcpd --exclude=core --exclude=storage --exclude=vendor --verbose .
 
-  # Run Codeception tests
-  # @todo
+  curl http://localhost:8080
 
-  wget http://localhost:8080
+  - cd ~/build/kuflievskiy/birthdays/codeception/
+  # Run Codeception Acceptance tests
+  - php ~/build/kuflievskiy/birthdays/vendor/bin/codecept bootstrap
+  - php ~/build/kuflievskiy/birthdays/vendor/bin/codecept build
+  - mv -f tests/acceptance.suite.sample.yml tests/acceptance.suite.yml
+  - mv -f tests/functional.suite.sample.yml tests/functional.suite.yml
+  - mv -f tests/unit.suite.sample.yml tests/unit.suite.yml
+
+  # Set config files
+  - mv -f codeception.sample.yml codeception.yml
+  - cat codeception.yml
+  - cat tests/acceptance.suite.yml
+  - php ~/build/kuflievskiy/birthdays/vendor/bin/codecept run acceptance --steps --env phantom --env firefox
+  - php ~/build/kuflievskiy/birthdays/vendor/bin/codecept run functional --steps
+  - php ~/build/kuflievskiy/birthdays/vendor/bin/codecept run unit --steps
+
 notifications:
   email:
     kuflievskiy@gmail.com

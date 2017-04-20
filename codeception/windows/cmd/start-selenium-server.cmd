@@ -1,0 +1,1 @@
+"%PATH_JAVA%" -jar "%PATH_SELENIUM_SERVER%" -Dwebdriver.chrome.driver="%PATH_WEBDRIVER%"
