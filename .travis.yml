@@ -112,8 +112,8 @@ script:
   - cd ~/build/kuflievskiy/birthdays/codeception/
 
   # Run Codeception Acceptance tests
-  - php ./../vendor/codeception/codeception/codecept bootstrap
-  - php ./../vendor/codeception/codeception/codecept build
+  - php $TRAVIS_BUILD_DIR/vendor/codeception/codeception/codecept bootstrap
+  - php $TRAVIS_BUILD_DIR/vendor/codeception/codeception/codecept build
   - mv -f tests/acceptance.suite.sample.yml tests/acceptance.suite.yml
   - mv -f tests/functional.suite.sample.yml tests/functional.suite.yml
   - mv -f tests/unit.suite.sample.yml tests/unit.suite.yml
@@ -122,9 +122,9 @@ script:
   - mv -f codeception.sample.yml codeception.yml
   - cat codeception.yml
   - cat tests/acceptance.suite.yml
-  - php ./../vendor/codeception/codeception/codecept run acceptance --steps --env phantom --env firefox
-  - php ./../vendor/codeception/codeception/codecept run functional --steps
-  - php ./../vendor/codeception/codeception/codecept run unit --steps
+  - php $TRAVIS_BUILD_DIR/vendor/codeception/codeception/codecept run acceptance --steps --env phantom --env firefox
+  - php $TRAVIS_BUILD_DIR/vendor/codeception/codeception/codecept run functional --steps
+  - php $TRAVIS_BUILD_DIR/vendor/codeception/codeception/codecept run unit --steps
 
 notifications:
   email:
