@@ -55,7 +55,18 @@
 						<div class="col-md-3">
 						</div>												
 					</div>
-					<hr>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3 text-right">
+                            <label for="last_name">Skype Login</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="last_name" name="skype" type="text" value="<?php echo $userData->skype; ?>" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                    <hr>
 					<div class="row">
 						<div class="col-md-3 text-right">
 							<label for="first_name">First Name</label>						

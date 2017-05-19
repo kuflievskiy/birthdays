@@ -87,7 +87,10 @@
 						</div>    
                         <label>Email</label>
                         <input name="email" type="email" value="" class="form-control">
-                        
+
+                        <label>Skype Login</label>
+                        <input name="skype" type="textinput" value="" class="form-control">
+
 						<label>First Name</label>
                         <input name="first_name" type="text" value="" class="form-control">
                         

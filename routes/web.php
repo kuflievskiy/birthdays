@@ -70,6 +70,7 @@ Route::post('/sign-up', function(Request $request) {
 		$user->last_name = $data['last_name'];
 		$user->birthday_date = date("Y-m-d", strtotime($data['birthday_date']));
 		$user->wishlist = $data['wishlist'];
+        $user->skype = $data['skype'];
 		$user->save();
 
 		// Flush calendar cache on user sign up action.

@@ -51,7 +51,8 @@ class Profile extends BaseController
 			$user->last_name = filter_input( INPUT_POST, 'last_name', FILTER_SANITIZE_STRING );
 			$user->birthday_date = filter_input( INPUT_POST, 'birthday_date', FILTER_SANITIZE_STRING );
 			$user->wishlist = filter_input( INPUT_POST, 'wishlist', FILTER_SANITIZE_STRING );
-			$user->save();		
+            $user->skype = filter_input( INPUT_POST, 'skype', FILTER_SANITIZE_STRING );
+			$user->save();
 			
 			\Cache::flush();
 		}
