@@ -8,7 +8,7 @@ modules:
         - Asserts
         - \Helper\Unit
         - Db:
-               dsn: "mysql:host=localhost;port=3306;dbname=db_test"
+               dsn: "mysql:host=localhost;port=3306;dbname=birthdays"
                user: 'root'
                password: 'rootpass'
                populate: false
