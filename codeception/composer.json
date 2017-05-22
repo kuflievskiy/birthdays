@@ -1,0 +1,8 @@
+{
+  "require": {
+    "codeception/codeception": "^2.2",
+    "phpunit/phpunit": ">4.8.20 <6.0",
+    "redmatter/codeception-multidb": "~2.0@dev",
+    "flow/jsonpath":"0.3.4"
+  }
+}
