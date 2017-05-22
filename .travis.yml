@@ -112,10 +112,12 @@ script:
   #- curl http://localhost:8080
 
   - cd ~/build/kuflievskiy/birthdays/codeception/
+  - composer install
 
-  # Run Codeception Acceptance tests
+  # Run Codeception tests
   - php vendor/bin/codecept bootstrap
   - php vendor/bin/codecept build
+
   - mv -f tests/acceptance.suite.sample.yml tests/acceptance.suite.yml
   - mv -f tests/functional.suite.sample.yml tests/functional.suite.yml
   - mv -f tests/unit.suite.sample.yml tests/unit.suite.yml
