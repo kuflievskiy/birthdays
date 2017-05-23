@@ -115,8 +115,8 @@ script:
   - composer install
 
   # Run Codeception tests
-  - php vendor/bin/codecept bootstrap
-  - php vendor/bin/codecept build
+  #- php vendor/bin/codecept bootstrap
+  #- php vendor/bin/codecept build
 
   - mv -f tests/acceptance.suite.sample.yml tests/acceptance.suite.yml
   - mv -f tests/functional.suite.sample.yml tests/functional.suite.yml
