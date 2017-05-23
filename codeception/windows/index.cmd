@@ -16,4 +16,10 @@ rem php ./vendor/codeception/codeception/codecept run codeception/acceptance/Tes
 rem php ./vendor/codeception/codeception/codecept run acceptance some.feature
 rem php ./vendor/codeception/codeception/codecept run -g scenarioName --html --debug --colors --steps
 
+rem php ./vendor/codeception/codeception/codecept run acceptance --steps --env firefox
+rem php ./vendor/codeception/codeception/codecept run functional --steps
+rem php ./vendor/codeception/codeception/codecept run unit --steps
+
+rem php ./vendor/codeception/codeception/codecept run -g signup --html --debug --colors --steps --env chrome
+php ./vendor/codeception/codeception/codecept run -g signup --html --colors --steps --env chrome
 pause

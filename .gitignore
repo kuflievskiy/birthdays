@@ -12,3 +12,8 @@ Homestead.yaml
 /config/api.php
 /codeception/windows/distribs/
 /codeception/windows/cmd/config.cmd
+/codeception/tests/acceptance.suite.yml
+/codeception/tests/functional.suite.yml
+/codeception/tests/unit.suite.yml
+/codeception/tests/_output/
+/codeception/vendor/

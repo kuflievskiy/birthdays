@@ -28,3 +28,29 @@ from unknown error: page could not be found: chrome-extension://aapnijgdinl
 hnhlmodcfapnahmbfebeb/_generated_background_page.html
 
 Update version of chromedriver from https://sites.google.com/a/chromium.org/chromedriver/downloads
+
+
+# Gherkin Scenarios
+
+# Create `.feature` file
+
+	php vendor/bin/codecept g:feature acceptance signup
+
+#
+
+	php vendor/bin/codecept gherkin:snippets signup
+
+#
+
+	php vendor/bin/codecept dry-run acceptance signup.feature
+
+#
+
+	php vendor/bin/codecept gherkin:steps signup
+
+#
+
+	php vendor/bin/codecept run -g signup --html --debug --colors --steps
+
+# sample https://github.com/edno/codeception-gherkin-param/blob/master/tests/acceptance/GherkinParam.feature
+# https://github.com/llvdl/dominoes-slim/tree/252519252e3cd884ab702f9e6390ab265eb36bff
