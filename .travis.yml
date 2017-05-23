@@ -127,6 +127,10 @@ script:
   - cat codeception.yml
   - cat tests/acceptance.suite.yml
   - php vendor/bin/codecept run acceptance --steps --env phantom --env firefox
+
+  # Debug information, output report.html content
+  - cat tests/_output/report.html
+
   - php vendor/bin/codecept run functional --steps
   - php vendor/bin/codecept run unit --steps
 
