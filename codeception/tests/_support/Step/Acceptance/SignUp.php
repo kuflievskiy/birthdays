@@ -74,8 +74,8 @@ class SignUp {
      */
     public function seeMyBirthdayOnCalendar()
     {
-        //$grabbedPageSource = $this->I->grabPageSource();
-        //codecept_debug($grabbedPageSource);
+        $grabbedPageSource = $this->I->grabPageSource();
+        codecept_debug($grabbedPageSource);
 
         $this->I->seeCurrentUrlEquals( '/calendar/' . date('Y') );
 
