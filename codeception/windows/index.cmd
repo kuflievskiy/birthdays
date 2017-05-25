@@ -21,5 +21,9 @@ rem php ./vendor/codeception/codeception/codecept run functional --steps
 rem php ./vendor/codeception/codeception/codecept run unit --steps
 
 rem php ./vendor/codeception/codeception/codecept run -g signup --html --debug --colors --steps --env chrome
-php ./vendor/codeception/codeception/codecept run -g signup --html --colors --steps --env chrome
+rem php ./vendor/codeception/codeception/codecept run -g signup --html --colors --steps --env chrome
+
+
+php ./vendor/codeception/codeception/codecept run functional APICest --html --debug --colors --steps --env chrome
+
 pause
