@@ -16,7 +16,7 @@ class APIConnection {
      * */
 	public function isAPIAccessAllowed() {
 
-	    if(defined('TRAVIS') and TRAVIS and defined('CI') and CI){
+	    if(getenv('TRAVIS') and getenv('CI')){
             return [
                 'success' => true,
                 'code'    => 200,
