@@ -45,7 +45,7 @@ class Calendar extends BaseController
 			$users = [];
 		}
 		
-		return response()->json([$users, 200]);
+		return response()->json($users);
 	}
 	
 	/**
@@ -79,7 +79,7 @@ class Calendar extends BaseController
 			$users = [];
 		}
 		
-		return response()->json([$users, 200]);
+		return response()->json($users);
 	}
 
 	/**
@@ -87,12 +87,8 @@ class Calendar extends BaseController
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 *
-	 * curl -i -X GET -H 'X-SecretKey: xxxx' /api/v1/test
-	 * curl -i -X GET -H 'X-SecretKey: xxxx' /api/v1/calendar/2017/04/05
-	 * curl -i -X GET -H 'X-SecretKey: xxxx' /api/v1/calendar/2017/04
-	 * curl -i -X GET -H 'X-SecretKey: xxxx' /api/v1/calendar/2017
 	 */
 	public function test() {
-		return response()->json([$this->apiConnection->isAPIAccessAllowed(), 200]);
+		return response()->json($this->apiConnection->isAPIAccessAllowed());
 	}
 }
