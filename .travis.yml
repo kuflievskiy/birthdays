@@ -127,8 +127,8 @@ script:
   - mv -f codeception.sample.yml codeception.yml
   - cat codeception.yml
   - cat tests/acceptance.suite.yml
-  - php vendor/bin/codecept run acceptance --colors --steps --env phantom --debug
-  - php vendor/bin/codecept run functional --colors --steps --debug
+  - php vendor/bin/codecept run acceptance --colors --steps --env phantom
+  - php vendor/bin/codecept run functional --colors --steps
   - php vendor/bin/codecept run unit --steps
 
 notifications:

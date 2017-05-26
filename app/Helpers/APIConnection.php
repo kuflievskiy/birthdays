@@ -49,7 +49,6 @@ class APIConnection {
 				'success' => false,
 				'code'    => 403,
 				'message' => 'Forbidden. Your IP is not allowed.',
-                'debug' => $remoteServerAddr,
 			];
 		}
 		
