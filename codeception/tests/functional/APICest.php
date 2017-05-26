@@ -33,6 +33,7 @@ class APICest
         // {"success":true,"code":200,"message":"OK"}
 
         codecept_debug($I->grabResponse());
+        codecept_debug(print_r($_SERVER,true));
 
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
