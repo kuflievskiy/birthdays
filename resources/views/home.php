@@ -41,9 +41,6 @@
                     <div class="tab-pane active in" id="login">
                       <form class="form-horizontal" action='/sign-in' method="POST">
                         <fieldset>
-                          <div id="legend">
-                            <legend class="">Login</legend>
-                          </div>    
                           <div class="control-group">
                             <!-- email -->
                             <label class="control-label"  for="email">Email</label>
@@ -81,10 +78,6 @@
 
                     <div class="tab-pane fade" id="create">
                       <form id="tab" action="/sign-up" method="post">
-						<div id="legend">
-							<legend class="">Create Account</legend>
-							<p class="">Note : Please wait 1 hour to have your account approved. </p>
-						</div>    
                         <label>Email</label>
                         <input name="email" type="email" value="" class="form-control">
 
@@ -116,11 +109,8 @@
 					
                     <div class="tab-pane fade" id="password-reset">					
 						<form id="tab" action="/" method="post">
-							<div id="legend">
-								<legend class="">Password Reset</legend>
-							</div>
-							<label>Email</label>
-							<input name="email" type="email" value="" class="form-control">
+                            <br>
+							<input name="email" type="email" value="" class="form-control" placeholder="Type your Email here">
 							<input type="hidden" name="reset_password" value="1">
 							<br>
 							<div>

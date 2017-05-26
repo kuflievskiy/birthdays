@@ -13,24 +13,6 @@ use App\User;
 
 class Calendar extends BaseController
 {
-	/**
-	 * @property $russian_months
-	 * */
-	public $russian_months = [
-        1 => 'Пьянварь',
-        2 => 'Фигвраль',
-        3 => 'Кошмарт',
-        4 => 'Сопрель',
-        5 => 'Сымай',
-        6 => 'Теплюнь',
-        7 => 'Жарюль',
-        8 => 'Авгрусть',
-        9 => 'Свистябрь',
-        10 => 'Моктябрь',
-        11 => 'Гноябрь',
-        12 => 'Дубабрь'
-    ];
-
 	public function index( $year ){
 
 		if( ! \Auth::check() ) {
@@ -81,12 +63,7 @@ class Calendar extends BaseController
 			$template = 'calendar';
 		}
 
-		return view($template, [
-			'calendar' => $calendar, 
-			'year' => $year,
-			'russian_months' => $this->russian_months,
-			'userData' => \Auth::user(),
-		]);
+        return view($template, ['calendar' => $calendar, 'year' => $year, 'userData' => \Auth::user()]);
 	}
 
 	/**
@@ -99,66 +76,81 @@ class Calendar extends BaseController
 	 */
 	public function getMonth($month,$year)
 	{
-		$monthData = [];
+        if (\Cache::has('calendar'.$month.$year)) {
+            $monthData = \Cache::get('calendar'.$month.$year);
+        }else{
+            $monthData = $this->buildMonthData($month, $year);
 
-		if (\Cache::has('calendar'.$month.$year)) {
-			$monthData = \Cache::get('calendar'.$month.$year);
-		}else{
-			$dayofmonth = date("t", mktime(1, 1, 1, $month, 1, $year)) ;// Вычисляем число дней в текущем месяце
-
-			// Счётчик для дней месяца
-			$day_count = 1;
-
-			// 1. Первая неделя
-			$num = 0;
-			for($i = 0; $i < 7; $i++)
-			{
-				// Вычисляем номер дня недели для числа
-				$dayofweek = date('w', mktime(0, 0, 0, $month, $day_count, $year));
-				// Приводим к числа к формату 1 - понедельник, ..., 6 - суббота
-				$dayofweek = $dayofweek - 1;
-				if($dayofweek == -1) $dayofweek = 6;
-				if($dayofweek == $i)
-				{
-
-					// Если дни недели совпадают,
-					// заполняем массив $week
-					// числами месяца
-					$monthData[$num][$i]['dayNum'] = date('j',mktime(0, 0, 0,$month,$day_count,$year));
-
-					$day_count++;
-				} else{
-					$monthData[$num][$i] = "";
-				}
-			}
-
-			// 2. Последующие недели месяца
-			while(true){
-				$num++;
-				for($i = 0; $i < 7; $i++)
-				{
-					$monthData[$num][$i]['dayNum'] = $day_count;
-					$day_count++;
-					// Если достигли конца месяца - выходим
-					// из цикла
-					if($day_count > $dayofmonth) break;
-				}
-				// Если достигли конца месяца - выходим
-				// из цикла
-				if($day_count > $dayofmonth) break;
-			}
-
-			\Cache::put('calendar'.$month.$year, $monthData, 3600);
-		}
+            \Cache::put('calendar'.$month.$year, $monthData, 3600);
+        }
 
 		return $monthData;
+    }
+
+    /**
+     * Function buildMonthData
+     *
+     * @param $month
+     * @param $year
+     *
+     * @return array
+     */
+    private function buildMonthData($month,$year)
+    {
+        $monthData = [];
+        $dayofmonth = date("t", mktime(1, 1, 1, $month, 1, $year)) ;// Вычисляем число дней в текущем месяце
+
+        // Day counter in a month.
+        $day_count = 1;
+
+        // 1. First week
+        $num = 0;
+        for($i = 0; $i < 7; $i++)
+        {
+            // Calculate day number
+            $dayofweek = date('w', mktime(0, 0, 0, $month, $day_count, $year));
+
+            // Format:
+            // 1 - Monday
+            // 6 - Saturday
+            $dayofweek = $dayofweek - 1;
+            if($dayofweek == -1) $dayofweek = 6;
+            if($dayofweek == $i)
+            {
+                // Set day num in each cell for this week
+                $monthData[$num][$i]['dayNum'] = date('j',mktime(0, 0, 0,$month,$day_count,$year));
+
+                $day_count++;
+            } else{
+                $monthData[$num][$i] = "";
+            }
+        }
+
+        // 2. All next weeks
+        while(true){
+            $num++;
+            for($i = 0; $i < 7; $i++)
+            {
+                $monthData[$num][$i]['dayNum'] = $day_count;
+                $day_count++;
+                if ($day_count > $dayofmonth) {
+                    break;
+                }
+            }
+
+            if ($day_count > $dayofmonth) {
+                break;
+            }
+        }
+
+        return $monthData;
     }
 
     /**
      * Get either a Gravatar URL or complete image tag for a specified email address.
      *
      * @param string $email The email address
-     * @param string $s Size in pixels, defaults to 80px [ 1 - 2048 ]
+     * @param int|string $s Size in pixels, defaults to 80px [ 1 - 2048 ]
      * @param string $d Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
      * @param string $r Maximum rating (inclusive) [ g | pg | r | x ]
      * @param array $atts Optional, additional key/value attributes to include in the IMG tag
@@ -169,12 +161,7 @@ class Calendar extends BaseController
         $url = 'http://www.gravatar.com/avatar/';
         $url .= md5( strtolower( trim( $email ) ) );
         $url .= "?s=$s&d=$d&r=$r";
-
 	    return $url;
-
-//        $headers = get_headers($url,1);
-//        if (strpos($headers[0],'200')) return $url;
-//        else if (strpos($headers[0],'404')) return '';
     }
 	
 }

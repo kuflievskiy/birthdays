@@ -58,9 +58,7 @@
         <?php $modalBoxes = ''; ?>
 		<?php foreach($calendar as $month_index => $monthData): ?>
 			<div class="col-md-4">
-				<h4>
-                    <?php echo $russian_months[$month_index] . ' [ <span style="color:lightseagreen;">'.  date("F", mktime(0, 0, 0, $month_index, 10)) . '</span> ]'; ?>
-                </h4>
+				<h4><?php echo date("F", mktime(0, 0, 0, $month_index, 10)); ?></h4>
                 <table class='table table-striped table-bordered'>
                     <tr>
                         <td>MON</td>
