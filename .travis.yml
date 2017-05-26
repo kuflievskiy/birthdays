@@ -76,6 +76,7 @@ before_script:
   - mysqladmin create birthdays --user="root" --password="rootpass"
 
   - cp .env.ci .env  #copy over CI environment configuration
+  - cp config/api.sample.php config/api.php
 
   - travis_retry composer self-update
   - travis_retry composer install --prefer-source --no-interaction
