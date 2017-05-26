@@ -16,14 +16,6 @@ class APIConnection {
      * */
 	public function isAPIAccessAllowed() {
 
-	    if(isset($_SERVER['TRAVIS']) and $_SERVER['TRAVIS'] and isset($_SERVER['CI']) and $_SERVER['CI']){
-            return [
-                'success' => true,
-                'code'    => 200,
-                'message' => 'OK',
-            ];
-        }
-
 		$config = Config::get('api');
 		
 		if(!Request::isMethod('get')) {
@@ -57,6 +49,7 @@ class APIConnection {
 				'success' => false,
 				'code'    => 403,
 				'message' => 'Forbidden. Your IP is not allowed.',
+                'debug' => $remoteServerAddr,
 			];
 		}
 		
