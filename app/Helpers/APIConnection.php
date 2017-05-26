@@ -16,7 +16,7 @@ class APIConnection {
      * */
 	public function isAPIAccessAllowed() {
 
-	    if(getenv('TRAVIS') and getenv('CI')){
+	    if(isset($_SERVER['TRAVIS']) and $_SERVER['TRAVIS'] and isset($_SERVER['CI']) and $_SERVER['CI']){
             return [
                 'success' => true,
                 'code'    => 200,
