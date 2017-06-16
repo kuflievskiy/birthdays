@@ -1,7 +1,4 @@
-<?php
-use App\Http\Controllers\Calendar;
-
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>Profile <?php echo $userData->first_name; ?> <?php echo $userData->last_name; ?></title>
@@ -40,7 +37,7 @@ use App\Http\Controllers\Calendar;
 				<center>
 
 
-                <p><img src="<?php echo Calendar::getGravatarURL($userData->email, 200, 'mm'); ?>" name="aboutme" width="200" height="200" border="0" class="img-circle"></p>
+                <p><img src="<?php echo App\Calendar::getGravatarURL($userData->email, 200, 'mm'); ?>" name="aboutme" width="200" height="200" border="0" class="img-circle"></p>
 
 				<form id="tab" action="/profile/<?php echo $userData->id; ?>" method="post">
 					
