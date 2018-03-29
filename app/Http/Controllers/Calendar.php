@@ -35,12 +35,6 @@ class Calendar extends BaseController
 
 		$calendar = $calendarModel->extendCalendarWithData( $calendar, $users );
 
-		if('true' == filter_input(INPUT_GET,'showMeYourSecret')){
-			$template = 'calendar-new';
-		}else{
-			$template = 'calendar';
-		}
-
-        return view($template, ['calendar' => $calendar, 'year' => $year, 'userData' => \Auth::user()]);
+        return view('calendar-new', ['calendar' => $calendar, 'year' => $year, 'userData' => \Auth::user()]);
 	}
 }
