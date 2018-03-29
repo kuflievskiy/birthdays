@@ -1,0 +1,377 @@
+body {
+    position: relative;
+
+    min-width: 760px;
+    height: 100vh;
+
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: 50% 0;
+    background-attachment: fixed;
+
+    margin: 0 auto;
+
+    overflow-x: hidden;
+}
+
+@media screen and (max-width: 760px) {
+    body {
+        overflow-x: auto;
+    }
+    .navbar {
+        display: none;
+    }
+}
+
+.month-january {
+    background-image: url(images/january.jpg);
+}
+.month-february {
+    background-image: url(images/february.jpeg);
+}
+.month-march {
+    background-image: url(images/march.jpeg);
+}
+.month-april {
+    background-image: url(images/april.jpeg);
+}
+.month-may {
+    background-image: url(images/may.jpeg);
+}
+.month-june {
+    background-image: url(images/june.jpeg);
+}
+.month-july {
+    background-image: url(images/july.jpeg);
+}
+.month-august {
+    background-image: url(images/august.jpeg);
+}
+.month-september {
+    background-image: url(images/september.jpg);
+}
+.month-october {
+    background-image: url(images/october.jpg);
+}
+.month-november {
+    background-image: url(images/november.jpeg);
+}
+.month-december {
+    background-image: url(images/december.jpeg);
+}
+
+.page-wrapper {
+    background-color: rgba(255,255,255,0.8);
+
+    margin: 0 40px 40px;
+
+    -webkit-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.4);
+    border-radius: 4px;
+}
+.navbar {
+    margin-bottom: 40px;
+}
+
+/*
+    table styles
+*/
+table {
+    display: block;
+    width: 100%;
+
+    font-family: Arial;
+
+    overflow: hidden;
+}
+thead,
+tbody {
+    display: block;
+    width: 100%;
+}
+tr {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -moz-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+
+    width: 100%;
+}
+th,
+td {
+    position: relative;
+    display: block;
+    width: 14.3%;
+}
+
+td {
+    height: 80px;
+}
+
+
+
+/*
+    masonry grid
+*/
+.calendar-container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -moz-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+
+    /*-webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    -moz-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;*/
+
+    /*-webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;*/
+
+    position: relative;
+
+    width: 95%;
+    margin: 0 auto;
+
+    padding: 50px 0;
+}
+
+.single-calendar-month {
+    width: 32%;
+}
+
+@media screen and (max-width: 1200px) {
+    .single-calendar-month {
+        width: 48%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .single-calendar-month {
+        width: 100%;
+    }
+}
+
+/*
+    calendar
+*/
+th {
+    text-align: center;
+    text-shadow: 2px 1px 3px rgba(252, 252, 252, 0.8);
+}
+.table-striped>tbody>tr,
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #fff;
+}
+.table-bordered>tbody>tr>td,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>td,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>thead>tr>th {
+    border: none;
+}
+.table-bordered {
+    border-top: none;
+    border-radius: 4px;
+}
+
+.table-striped>tbody>tr:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+}
+
+.table-bordered>thead>tr>th:not(:last-child) {
+    border-right: 1px solid #fff;
+}
+.table-bordered>tbody>tr>td:not(:last-child) {
+    border-right: 1px solid #ddd;
+}
+
+
+
+/*
+    began of calendar deep styles
+*/
+.day-number {
+    position: absolute;
+    left: 5px;
+    top: 3px;
+    font-size: 12px;
+}
+
+td[attr="day-with-birthday"] .day-number {
+    display: block;
+    height: 20px;
+    width: 20px;
+
+    color: #fff;
+    line-height: 21px;
+    font-weight: bold;
+    text-align: center;
+
+
+    background-color: #E90C00;
+    border-radius: 50%;
+}
+
+/* birthday man container */
+td[attr="day-with-birthday"] div {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    bottom: 10px;
+
+    width: 35px;
+    height: 35px;
+}
+td[attr="day-with-birthday"] div:hover {
+    z-index: 2;
+}
+
+td[attr="day-with-birthday"] div:not(:last-child) {
+    left: -15px;
+    right: 0 !important;
+}
+
+td[attr="day-with-birthday"] div:not(:only-of-type) {
+    right: -15px;
+}
+
+/* birthday man name */
+td[attr="day-with-birthday"] div .birthday-man-name {
+    display: none;
+}
+td[attr="day-with-birthday"] div p {
+    margin: 0;
+}
+.table>tbody>tr>td {
+    padding: 29px 2px 2px;
+    text-align: center;
+}
+td[attr="day-with-birthday"] a {
+    display: block;
+}
+td[attr="day-with-birthday"] img {
+    display: block;
+    width: 35px;
+    height: 35px;
+
+    border-radius: 50%;
+    border: 1px solid #ddd;
+}
+
+
+/*
+    tooltips
+*/
+body .tooltipster-sidetip .tooltipster-box {
+    background: #fff;
+    border: 1px solid #000;
+}
+body .tooltipster-sidetip .tooltipster-content {
+    color: #000;
+    font-weight: bold;
+}
+body .tooltipster-sidetip.tooltipster-top .tooltipster-arrow-border {
+    border-top-color: #000;
+}
+body .tooltipster-sidetip.tooltipster-top .tooltipster-arrow-background {
+    border-top-color: #fff;
+    left: 0;
+    top: 0;
+}
+body .tooltipster-sidetip .tooltipster-arrow-border {
+    top: 1px;
+}
+
+
+/* january */
+.single-calendar-month:first-child thead {
+    /*background-color: #A2D0EB;*/
+}
+
+/* february */
+.single-calendar-month:nth-child(2) thead {
+    /*background-color: #7FB6D7;*/
+}
+
+/* march */
+.single-calendar-month:nth-child(3) thead {
+    /*background-color: #B4EDDA;*/
+}
+
+/* april */
+.single-calendar-month:nth-child(4) thead {
+    /*background-color: #9FEDD3;*/
+}
+
+/* may */
+.single-calendar-month:nth-child(5) thead {
+    /*background-color: #7BDABB;*/
+}
+
+/* june */
+.single-calendar-month:nth-child(6) thead {
+    /*background-color: 	#FDB0AA;*/
+}
+
+/* july */
+.single-calendar-month:nth-child(7) thead {
+    /*background-color: #FD948C;*/
+}
+
+/* august */
+.single-calendar-month:nth-child(8) thead {
+    /*background-color: #FB7066;*/
+}
+
+/* september */
+.single-calendar-month:nth-child(9) thead {
+    /*background-color: #FFD1AA;*/
+}
+
+/* october */
+.single-calendar-month:nth-child(10) thead {
+    /*background-color: #FFC08C;*/
+}
+
+/* november */
+.single-calendar-month:nth-child(11) thead {
+    /*background-color: #FFAB65;*/
+}
+
+/* december */
+.single-calendar-month:last-child thead {
+    /*background-color: #B6D7EB;*/
+}
