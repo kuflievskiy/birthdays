@@ -17,7 +17,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/v1/calendar', 'API\v1\Calendar@index');
-Route::get('/v1/calendar/{year}', 'API\v1\Calendar@index');
-Route::get('/v1/calendar/{year}/{month}/{day?}', 'API\v1\Calendar@date');
-Route::get('/v1/test', 'API\v1\Calendar@test');
+Route::group(['prefix' => '/v1','namespace' => 'API\v1'], function()
+{
+    Route::get('test', 'Calendar@test');
+
+    Route::get('ping', function (Request $request)
+    {
+        return response()->json('pong');
+    });
+
+    Route::get('calendar', 'Calendar@index');
+    Route::get('calendar/{year}', 'Calendar@index');
+    Route::get('calendar/{year}/{month}/{day?}', 'Calendar@date');
+    //Route::get('test2/page/{page?}', 'Calendar@test2');
+});

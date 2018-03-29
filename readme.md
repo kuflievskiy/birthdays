@@ -30,23 +30,23 @@ https://github.com/llvdl/dominoes-slim/tree/252519252e3cd884ab702f9e6390ab265eb3
 ##### Method `/test/` is used to check if API access allowed.
 
 ```bash
-curl -i -X GET -H 'X-SecretKey: xxxxxx' http://set.domain.name.here/api/v1/test/
+curl -i -X GET -H 'X-SecretKey: xxxxxx' http://set.domain.name.here/api/v1/test
 ```
 
 ##### Method `/calendar/2017/` is used to fetch all birthdays.
 
 ```bash
-curl -i -X GET -H 'X-SecretKey: xxxxxx' http://set.domain.name.here/api/v1/calendar/2017/
+curl -i -X GET -H 'X-SecretKey: xxxxxx' http://set.domain.name.here/api/v1/calendar/2017
 ```
 
 ##### Method `/calendar/2017/04/` is used to fetch birthdays for a month.
 
 ```bash
-curl -i -X GET -H 'X-SecretKey: xxxxxx' http://set.domain.name.here/api/v1/calendar/2017/04/
+curl -i -X GET -H 'X-SecretKey: xxxxxx' http://set.domain.name.here/api/v1/calendar/2017/04
 ```
 
 ##### Method `/calendar/2017/04/05/` is used to fetch birthdays for a day.
 
 ```bash
-curl -i -X GET -H 'X-SecretKey: xxxxxx' http://set.domain.name.here/api/v1/calendar/2017/04/05/
+curl -i -X GET -H 'X-SecretKey: xxxxxx' http://set.domain.name.here/api/v1/calendar/2017/04/05
 ```
