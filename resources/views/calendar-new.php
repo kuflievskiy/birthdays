@@ -119,9 +119,11 @@
 	                                                                  <span aria-hidden="true">&times;</span>
 	                                                                </button>
 	                                                              </div>
-	                                                              <div class="modal-body">
-	                                                              <p>'.$userData['first_name'].' '.$userData['last_name'].'</p>
-	                                                              '.nl2br($userData['wishlist']).'</div>
+                                                                  <div class="modal-body">
+                                                                  <p>'.$userData['first_name'].' '.$userData['last_name'].'</p>
+                                                                   <p>'.nl2br($userData['wishlist'] ).'</p>
+                                                                   <p>Wish updated: '.$userData['wish_updated_at'].'</p>
+	                                                              </div>
 	                                                              <div class="modal-footer">
 	                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
 	                                                              </div>
