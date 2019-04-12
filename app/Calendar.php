@@ -23,12 +23,13 @@ class Calendar extends Model
                 foreach ($weekDays as $dayIndex => &$dayData) {
                     if (isset($dayData['dayNum']) && $dateDay == $dayData['dayNum']) {
                         $dayData['users'][] = [
-                            'gravatarURL' => $this->getGravatarURL($userData['email']),
-                            'wishlist'    => $userData['wishlist'],
-                            'email'       => $userData['email'],
-                            'updated_at'  => $userData['updated_at'],
-                            'first_name'  => $userData['first_name'],
-                            'last_name'   => $userData['last_name'],
+                            'gravatarURL'     => $this->getGravatarURL($userData['email']),
+                            'wishlist'        => $userData['wishlist'],
+                            'wish_updated_at' => $userData['wish_updated_at'],
+                            'email'           => $userData['email'],
+                            'updated_at'      => $userData['updated_at'],
+                            'first_name'      => $userData['first_name'],
+                            'last_name'       => $userData['last_name'],
                         ];
                     }
                 }

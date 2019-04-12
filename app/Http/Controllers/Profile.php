@@ -23,7 +23,6 @@ class Profile extends BaseController
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
 	 */
 	public function index($userId){
-
 		if( ! \Auth::check() ) {
 			return redirect('/');
 		}
@@ -34,7 +33,6 @@ class Profile extends BaseController
 	}
 	
 	public function update($userId){
-
 		if( ! \Auth::check() ) {
 			return redirect('/');
 		}
@@ -50,7 +48,9 @@ class Profile extends BaseController
 			$user->first_name = filter_input( INPUT_POST, 'first_name', FILTER_SANITIZE_STRING );
 			$user->last_name = filter_input( INPUT_POST, 'last_name', FILTER_SANITIZE_STRING );
 			$user->birthday_date = filter_input( INPUT_POST, 'birthday_date', FILTER_SANITIZE_STRING );
-			$user->wishlist = filter_input( INPUT_POST, 'wishlist', FILTER_SANITIZE_STRING );
+			$wishlist = filter_input( INPUT_POST, 'wishlist', FILTER_SANITIZE_STRING );
+			$user->wish_updated_at = $user->wishlist !== $wishlist ? date('Y-m-d H:i:s',time()) : $user->wish_updated_at;
+			$user->wishlist = $wishlist;
             $user->skype = filter_input( INPUT_POST, 'skype', FILTER_SANITIZE_STRING );
 			$user->save();
 			
