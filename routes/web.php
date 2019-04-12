@@ -70,6 +70,7 @@ Route::post('/sign-up', function(Request $request) {
 		$user->last_name = $data['last_name'];
 		$user->birthday_date = date("Y-m-d", strtotime($data['birthday_date']));
 		$user->wishlist = $data['wishlist'];
+		$user->wish_updated_at = $data['wishlist'] ? date('Y-m-d H:i:s',time()) : null;
         $user->skype = $data['skype'];
 		$user->save();
 
